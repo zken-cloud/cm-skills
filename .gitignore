@@ -1,0 +1,4 @@
+# CodeMender binaries — never commit
+cm
+cm-linux
+cm-*.zip

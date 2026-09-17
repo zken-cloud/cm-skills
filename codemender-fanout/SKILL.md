@@ -24,10 +24,11 @@ no bucket, and no secret store — this is the laptop path.
 
 1. **`cm` on PATH.** If missing: `scripts/bootstrap-cm.sh` downloads the right binary for
    this OS/arch into `~/.local/bin`.
-2. **Authenticated ADC**, entitled to the preview:
+2. **Authenticated ADC**, with a quota project entitled to CodeMender (see the
+   CodeMender set-up page on docs.cloud.google.com for how to get access):
    ```bash
-   gcloud auth application-default login <ldap>@google.com
-   gcloud auth application-default set-quota-project cloud-llm-preview1
+   gcloud auth application-default login <your-account>
+   gcloud auth application-default set-quota-project <CM_PROJECT>
    ```
 3. **`git`, `jq`, `unzip`** on PATH; the target is a **git** repo.
 4. **Sandbox runtime:**
@@ -129,8 +130,8 @@ impractical under `sandbox-exec` / `runsc do`.
 
 ## Troubleshooting
 
-- **`Unsupported agent interaction: codemender-preview`** — your ADC identity/quota project
-  isn't entitled to the preview agent. Re-check step 2.
+- **`Unsupported agent interaction: …`** — your ADC identity/quota project isn't
+  entitled to CodeMender. Re-check step 2.
 - **Linux: `runsc: permission denied` / no network** — run rootless (`SBX_RUNSC_FLAGS=--rootless`)
   or via sudo; if `--network=sandbox` has no egress on your host, set `SBX_NET=host` (parallel
   verify then collides on the port, so also set `VERIFY_FANOUT=1`).
